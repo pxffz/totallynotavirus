@@ -22,33 +22,8 @@ document.getElementById('chaosButton').addEventListener('click', function() {
     audio.play();
 
     for (let i = 0; i < 15; i++) {
-        const img = document.createElement('img');
-        img.src = images[Math.floor(Math.random() * images.length)];
-        img.style.position = 'absolute';
-        img.style.width = '100px';
-        img.style.height = '100px';
-        img.style.top = Math.random() * window.innerHeight + 'px';
-        img.style.left = Math.random() * window.innerWidth + 'px';
-        document.body.appendChild(img);
-
-        animateImage(img);
+        const imgSrc = images[Math.floor(Math.random() * images.length)];
+        const newTab = window.open('', '_blank');
+        newTab.document.write('<html><head><title>Chaos</title></head><body style="margin:0;display:flex;justify-content:center;align-items:center;height:100vh;background-color:black;color:white;font-family:Arial,sans-serif;"><img src="' + imgSrc + '" style="width:400px;height:400px;"></body></html>');
     }
 });
-
-function animateImage(img) {
-    const duration = 5000;
-    const start = performance.now();
-
-    function animate(timestamp) {
-        const progress = timestamp - start;
-        const x = Math.random() * window.innerWidth;
-        const y = Math.random() * window.innerHeight;
-        img.style.transform = `translate(${x}px, ${y}px)`;
-
-        if (progress < duration) {
-            requestAnimationFrame(animate);
-        }
-    }
-
-    requestAnimationFrame(animate);
-}
